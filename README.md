@@ -33,8 +33,6 @@ git clone <your-repo>
 cd feedback-api
 cp .env.example .env
 2. Run with Docker Compose (recommended)
-bash
-Copier le code
 # Start API + DB
 docker-compose up --build
 
@@ -44,8 +42,7 @@ The API will be available at http://localhost:8000.
 Migrations are applied automatically on container start.
 
 3. Local development
-bash
-Copier le code
+
 # Start PostgreSQL
 docker run --name postgres-dev -e POSTGRES_USER=feedback_user \
   -e POSTGRES_PASSWORD=feedback_password \
@@ -64,8 +61,7 @@ Database Migrations
 This project uses Alembic.
 Common commands:
 
-bash
-Copier le code
+
 # Apply migrations
 alembic upgrade head
 
@@ -81,8 +77,7 @@ alembic revision --autogenerate -m "Add column"
 # Create empty migration
 alembic revision -m "Custom migration"
 Docker Commands
-bash
-Copier le code
+
 # Build & start
 docker-compose up --build
 
@@ -96,8 +91,7 @@ docker-compose logs -f db
 # Exec into container
 docker-compose exec api bash
 docker-compose exec db psql -U feedback_user -d feedback_db
-markdown
-Copier le code
+
 
 👉 Étapes pour mettre à jour :  
 1. Ouvre ton projet dans VS Code (ou ton éditeur).  
