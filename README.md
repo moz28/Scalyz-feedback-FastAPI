@@ -1,160 +1,109 @@
-Feedback API
-A robust FastAPI microservice for collecting and retrieving user feedback, with PostgreSQL persistence, Alembic migrations, and full Docker containerization support.
-🚀 Features
+# Feedback API
 
-RESTful API with FastAPI
-PostgreSQL database with SQLAlchemy 2.x
-Alembic for database migrations and versioning
-Full Docker support (development and production)
-Pydantic v2 for data validation
-Health checks for monitoring
-Production-ready configuration
+A robust FastAPI microservice for collecting and retrieving user feedback, with PostgreSQL persistence, Alembic migrations, and full Docker containerization.  
 
-📋 API Endpoints
-Health Check
+---
 
-GET /healthz - Service health status
+## Features
+- RESTful API with **FastAPI**  
+- PostgreSQL database using **SQLAlchemy 2.x**  
+- Database migrations with **Alembic**  
+- **Dockerfile** & **Docker Compose** for local and production  
+- **Pydantic v2** for validation  
+- Health check endpoint for monitoring  
 
-Feedback Operations
+---
 
-POST /feedbacks - Create new feedback
-GET /feedbacks - List feedbacks (with pagination)
+## API Endpoints
+- `GET /healthz` → service health status  
+- `POST /feedbacks` → create new feedback  
+- `GET /feedbacks` → list feedbacks (with pagination)  
 
-🛠️ Quick Start
-Prerequisites
+---
 
-Docker and Docker Compose
-Python 3.12+ (for local development)
-
-1. Clone and Setup
-bashgit clone <your-repo>
-cd feedback-api
-
-# Copy environment file
-cp .env.example .env
-2. Run with Docker Compose (Recommended)
-bash# Start all services (API + Database)
-docker-compose up --build
-
-# Run in background
-docker-compose up -d --build
-The API will be available at http://localhost:8000
-Note: Migrations are automatically applied when the API container starts.
-3. Local Development Setup
-bash# Start PostgreSQL with Docker
-docker run --name postgres-dev -e POSTGRES_USER=feedback_user \
-  -e POSTGRES_PASSWORD=feedback_password \
-  -e POSTGRES_DB=feedback_db \
-  -p 5432:5432 -d postgres:16-alpine
-
-# Install dependencies
-pip install -r requirements.txt
-
-# Run initial migration
-alembic upgrade head
-
-# Run the API
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
-🗄️ Database Migrations
-This project uses Alembic for database migrations and schema versioning.
-Migration Commands
-bash# Apply all pending migrations
-alembic upgrade head
-
-# Downgrade by one migration
-alembic downgrade -1
-
-# Show current migration
-alembic current
-
-# Show migration history
-alembic history
-
-# Create new migration (auto-generate from model changes)
-alembic revision --autogenerate -m "Add new column"
-
-# Create empty migration (for manual changes)
-alembic revision -m "Custom migration"
-Using the Migration Script
-A convenient script is provided for migration management:
-bash# Apply migrations
-python scripts/migrate.py upgrade
-
-# Create new migration
-python scripts/migrate.py create "Add user_id to feedbacks"
-
-# Show migration history
-python scripts/migrate.py history
-
-# Show current revision
-python scripts/migrate.py current
-
-## Feedback API
-
-A robust FastAPI microservice for collecting and retrieving user feedback, with PostgreSQL persistence and full Docker containerization support.
-
-## 🚀 Features
-
-- **RESTful API** with FastAPI
-- **PostgreSQL** database with SQLAlchemy 2.x
-- **Full Docker support** (development and production)
-- **Pydantic v2** for data validation
-- **Health checks** for monitoring
-- **Production-ready** configuration
-
-## 📋 API Endpoints
-
-### Health Check
-- `GET /healthz` - Service health status
-
-### Feedback Operations
-- `POST /feedbacks` - Create new feedback
-- `GET /feedbacks` - List feedbacks (with pagination)
-
-## 🛠️ Quick Start
+## Quick Start
 
 ### Prerequisites
-- Docker and Docker Compose
-- Python 3.12+ (for local development)
+- Docker & Docker Compose  
+- Python 3.12+ (for local dev)  
 
-### 1. Clone and Setup
+### 1. Clone & setup
 ```bash
 git clone <your-repo>
 cd feedback-api
-
-# Copy environment file
 cp .env.example .env
-2. Run with Docker Compose (Recommended)
-bash# Start all services (API + Database)
+2. Run with Docker Compose (recommended)
+bash
+Copier le code
+# Start API + DB
 docker-compose up --build
 
-# Run in background
+# Or in background
 docker-compose up -d --build
-The API will be available at http://localhost:8000
-3. Local Development Setup
-bash# Start PostgreSQL with Docker
+The API will be available at http://localhost:8000.
+Migrations are applied automatically on container start.
+
+3. Local development
+bash
+Copier le code
+# Start PostgreSQL
 docker run --name postgres-dev -e POSTGRES_USER=feedback_user \
   -e POSTGRES_PASSWORD=feedback_password \
   -e POSTGRES_DB=feedback_db \
   -p 5432:5432 -d postgres:16-alpine
 
-# Install dependencies
+# Install deps
 pip install -r requirements.txt
 
-# Run the API
-uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+# Run migrations
+alembic upgrade head
 
-🐳 Docker Commands
-# Build and start services
+# Start API
+uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+Database Migrations
+This project uses Alembic.
+Common commands:
+
+bash
+Copier le code
+# Apply migrations
+alembic upgrade head
+
+# Rollback last migration
+alembic downgrade -1
+
+# Show current revision
+alembic current
+
+# Create new migration from models
+alembic revision --autogenerate -m "Add column"
+
+# Create empty migration
+alembic revision -m "Custom migration"
+Docker Commands
+bash
+Copier le code
+# Build & start
 docker-compose up --build
 
-# Stop services
+# Stop
 docker-compose down
 
-# View logs
+# Logs
 docker-compose logs -f api
 docker-compose logs -f db
 
-# Execute commands in running containers
+# Exec into container
 docker-compose exec api bash
 docker-compose exec db psql -U feedback_user -d feedback_db
+markdown
+Copier le code
+
+👉 Étapes pour mettre à jour :  
+1. Ouvre ton projet dans VS Code (ou ton éditeur).  
+2. Remplace le contenu de `README.md` par ce texte.  
+3. Commit & push :  
+   ```bash
+   git add README.md
+   git commit -m "docs: improve README with clean instructions"
+   git push
